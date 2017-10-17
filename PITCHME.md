@@ -33,6 +33,7 @@ require('redux') //... and many more!
 ```
 ---
 2. Create a webpack config from where to generate the shared bundle. Notice the entry file is the file we just created.
+
 ```javascript
 //webpack.dll.config.js
 var path = require("path")
@@ -58,6 +59,7 @@ module.exports = {
   ]
 };
 ```
+
 ---
 4. Generate the Dll bundle and manifest.
 running `webpack --config=webpack.dll.config.js`
