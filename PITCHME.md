@@ -10,7 +10,7 @@
 ### The Problem
 * How do we share code and dependencies between different react codebases all running as one big app?
 
-Example for this to work each bundle would need their own react, redux etc. when webpack compiles them. 
+Example: for this to work each bundle would need their own react, redux etc. at compile time. 
 
 ```html
 <!-- index.html -->
@@ -22,7 +22,7 @@ Example for this to work each bundle would need their own react, redux etc. when
 ```
 This leads to errors and huge bundles!
 ---
-### How can we use the webpack Dll plugin to solve this problem?
+### The webpack Dll plugin can solve this problem.
 The steps are simple.
 1. Create a JS file that simply requires the packages that need to be shared.
 ```javascript
@@ -31,7 +31,7 @@ require('react')
 require('react-dom')
 require('redux') //... and many more!
 ```
-
+---
 2. Create a webpack config from where to generate the shared bundle. Notice the entry file is the file we just created.
 ```javascript
 //webpack.dll.config.js
@@ -58,7 +58,7 @@ module.exports = {
   ]
 };
 ```
-
+---
 4. Generate the Dll bundle and manifest.
 running `webpack --config=webpack.dll.config.js`
 yields:
