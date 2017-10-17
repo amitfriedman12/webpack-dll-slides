@@ -10,7 +10,7 @@
 ### The Problem
 * How do we share code and dependencies between different react codebases all running as one big app?
 
-Example: for this to work each bundle would need their own react, redux etc. at compile time. 
+Example: for this to work each bundle would need their own react at compile time. 
 
 ```html
 <!-- index.html -->
