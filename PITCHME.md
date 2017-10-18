@@ -24,7 +24,7 @@ This leads to errors and huge bundles!
 ---
 ### The webpack Dll plugin can solve this problem.
 ---
-###Create a JS file that simply requires the packages that need to be shared.
+### Create a JS file that simply requires the packages that need to be shared.
 ```javascript
 # sharedPackages.js
 require('react')
@@ -32,7 +32,7 @@ require('react-dom')
 require('redux') //... and many more!
 ```
 ---
-###Create a webpack config for the dll bundle. Notice the entry file is the file we just created.
+### Create a webpack config for the dll bundle. Notice the entry file is the file we just created.
 
 ```javascript
 //webpack.dll.config.js
@@ -59,7 +59,7 @@ module.exports = {
 ```
 
 ---
-###Generate the Dll bundle and manifest.
+### Generate the Dll bundle and manifest.
 running 
 ```
 webpack --config=webpack.dll.config.js
@@ -73,12 +73,24 @@ dll/
 ```
 
 ---
-###Add the DllReference plugin to the other builds.
+### Add the DllReference plugin to the other builds.
 ```
 new webpack.DllReferencePlugin({
   'dll/lib-manifest.json',
   context: __dirname
 })
 ```
-Now when we Bundle our individual apps they will use the manifest to delegate specified dependencies to the lib.js bundle.`
+Now when we bundle our individual apps they will use the manifest to delegate specified dependencies to the lib.js bundle.
 ---
+### Now the entry file
+```html
+#index.html
+<script>
+  lazyLoader("lib.js", () => {
+    // load the rest of our apps after lib.js is loaded.
+  })
+</script>
+```
+
+---
+### Sweet! now we can load dependencies only once and share them across apps.
