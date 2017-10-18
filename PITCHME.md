@@ -24,7 +24,7 @@ This leads to errors and huge bundles!
 ---
 ### The webpack Dll plugin can solve this problem.
 ---
-1. Create a JS file that simply requires the packages that need to be shared.
+###Create a JS file that simply requires the packages that need to be shared.
 ```javascript
 # sharedPackages.js
 require('react')
@@ -32,13 +32,11 @@ require('react-dom')
 require('redux') //... and many more!
 ```
 ---
-2. Create a webpack config from where to generate the shared bundle. Notice the entry file is the file we just created.
+###Create a webpack config for the dll bundle. Notice the entry file is the file we just created.
 
 ```javascript
 //webpack.dll.config.js
-var path = require("path")
-var webpack = require("webpack")
-
+// ...
 module.exports = {
   context: path.join(__dirname, "client/shell"),
   entry: {
@@ -57,11 +55,11 @@ module.exports = {
       context: __dirname
     }),
   ]
-};
+}
 ```
 
 ---
-4. Generate the Dll bundle and manifest.
+###Generate the Dll bundle and manifest.
 running 
 ```
 webpack --config=webpack.dll.config.js
@@ -75,6 +73,12 @@ dll/
 ```
 
 ---
-3. Add the DllReference plugin to the webpack config of any build that you want to consume the bundle.
-
+###Add the DllReference plugin to the other builds.
+```
+new webpack.DllReferencePlugin({
+  'dll/lib-manifest.json',
+  context: __dirname
+})
+```
+Now when we Bundle our individual apps they will use the manifest to delegate specified dependencies to the lib.js bundle.`
 ---
