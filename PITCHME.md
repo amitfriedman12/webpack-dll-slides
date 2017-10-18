@@ -1,5 +1,4 @@
 # On the DLL
-<p>From the webpack docs:</p>
 <p style="text-align: center">The DllPlugin and DllReferencePlugin provide means to split bundles in a way that can drastically improve build time performance.</p>
 ---
 ### HYFN8 Front End App Design Goals
@@ -32,7 +31,7 @@ require('react-dom')
 require('redux') //... and many more!
 ```
 ---
-### Create a webpack config for the dll bundle. Notice the entry file is the file we just created.
+### Create a webpack config for the dll bundle.
 
 ```javascript
 //webpack.dll.config.js
@@ -87,10 +86,24 @@ Now when we bundle our individual apps they will use the manifest to delegate sp
 #index.html
 <script>
   lazyLoader("lib.js", () => {
-    // load the rest of our apps after lib.js is loaded.
+    lazyLoader(snapchat.bundle.js)
+    lazyLoader(pinterest.bundle.js)
+    lazyLoader(twitter.bundle.js)
+    lazyLoader(facebook.bundle.js)
+    lazyLoader(shell.bundle.js)
   })
 </script>
 ```
 
 ---
+### But... 
+<p>every app needs to be compiled against the same manifest file. How do we distribute them and keep them in sync?</p>
+---
+### With the help of git submodules
+```
+git submodule update --init
+```
+---
 ### Sweet! now we can load dependencies only once and share them across apps.
+<p>We also get faster build times because we don't have to rebuild our dependencies everytime we update our application code.</p>
+
