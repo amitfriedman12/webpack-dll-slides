@@ -13,11 +13,11 @@ Example: for this to work each bundle would need their own react at compile time
 
 ```html
 <!-- index.html -->
+<script src="https://somewhereonamazon/snap.bundle.js" />
+<script src="https://somewhereonamazon/twitter.bundle.js" />
+<script src="https://somewhereonamazon/pinterest.bundle.js" />
+<script src="https://somewhereonamazon/facebook.bundle.js" />
 <script src="shell.bundle.js" />
-<script src="snap.bundle.js" />
-<script src="twitter.bundle.js" />
-<script src="pinterest.bundle.js" />
-<script src="facebook.bundle.js" />
 ```
 This leads to errors and huge bundles!
 ---
@@ -72,7 +72,7 @@ dll/
 ```
 
 ---
-### Add the DllReference plugin to the other builds.
+### Add the Dll reference plugin to the other builds.
 ```
 new webpack.DllReferencePlugin({
   'dll/lib-manifest.json',
@@ -86,11 +86,11 @@ Now when we bundle our individual apps they will use the manifest to delegate sp
 #index.html
 <script>
   lazyLoader("lib.js", () => {
-    lazyLoader(snapchat.bundle.js)
-    lazyLoader(pinterest.bundle.js)
-    lazyLoader(twitter.bundle.js)
-    lazyLoader(facebook.bundle.js)
-    lazyLoader(shell.bundle.js)
+    lazyLoader("https://somewhereonamazon/snapchat.bundle.js")
+    lazyLoader("https://somewhereonamazon/pinterest.bundle.js")
+    lazyLoader("https://somewhereonamazon/twitter.bundle.js")
+    lazyLoader("https://somewhereonamazon/facebook.bundle.js")
+    lazyLoader("shell.bundle.js")
   })
 </script>
 ```
