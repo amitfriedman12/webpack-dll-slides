@@ -100,6 +100,7 @@ Now when we bundle our individual apps they will use the manifest to delegate sp
 <p>every app needs to be compiled against the same manifest file. How do we distribute them and keep them in sync?</p>
 ---
 ### With the help of git submodules
+<p>So we make another repo for our dll manifest and add it into each subapp as a submodule. Then when the manifest changes we just run.</p>
 ```
 git submodule update --init
 ```
@@ -107,3 +108,6 @@ git submodule update --init
 ### Sweet! now we can load dependencies only once and share them across apps.
 <p>We also get faster build times because we don't have to rebuild our dependencies everytime we update our application code.</p>
 
+---
+### Gotcha
+- Every package.json needs to declare every package in the dll manifest.
