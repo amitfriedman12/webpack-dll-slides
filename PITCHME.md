@@ -66,7 +66,7 @@ running
 ```
 webpack --config=webpack.dll.config.js
 ```
-yields:
+yields 2 files:
 
 ```
 dll/
