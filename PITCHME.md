@@ -23,7 +23,7 @@ Example: for this to work each bundle would need their own react at compile time
 This leads to errors and huge bundles!
 ---
 ### The webpack Dll plugin can solve this problem.
-The steps are simple.
+---
 1. Create a JS file that simply requires the packages that need to be shared.
 ```javascript
 # sharedPackages.js
@@ -64,12 +64,14 @@ module.exports = {
 4. Generate the Dll bundle and manifest.
 running `webpack --config=webpack.dll.config.js`
 yields:
+
 ```
 dll/
 * lib.js
 * lib-manifest.json
 ```
 
+---
 3. Add the DllReference plugin to the webpack config of any build that you want to consume the bundle.
 
 ---
