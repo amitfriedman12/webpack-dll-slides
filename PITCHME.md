@@ -62,7 +62,10 @@ module.exports = {
 
 ---
 4. Generate the Dll bundle and manifest.
-running `webpack --config=webpack.dll.config.js`
+running 
+```
+webpack --config=webpack.dll.config.js
+```
 yields:
 
 ```
